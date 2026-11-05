@@ -1,0 +1,38 @@
+{
+ "fatura_no": "ORN2026100222",
+ "tarih": "2026-03-25",
+ "satici_unvan": "Kuzey Enerji A.Ş.",
+ "satici_vkn": "5678901234",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Ofis Sandalyesi",
+   "miktar": 10,
+   "birim_fiyat": 4750.0,
+   "tutar": 47500.0
+  },
+  {
+   "aciklama": "Kahve (kg)",
+   "miktar": 2,
+   "birim_fiyat": 640.0,
+   "tutar": 1280.0
+  },
+  {
+   "aciklama": "Yazılım Lisansı (yıllık)",
+   "miktar": 2,
+   "birim_fiyat": 12500.0,
+   "tutar": 25000.0
+  },
+  {
+   "aciklama": "Nakliye Hizmeti",
+   "miktar": 9,
+   "birim_fiyat": 3200.0,
+   "tutar": 28800.0
+  }
+ ],
+ "ara_toplam": 102580.0,
+ "kdv_orani": 20,
+ "kdv_tutari": 20516.0,
+ "genel_toplam": 123096.0
+}

@@ -1,0 +1,32 @@
+{
+ "fatura_no": "ORN2026100185",
+ "tarih": "2026-04-03",
+ "satici_unvan": "Kuzey Enerji A.Ş.",
+ "satici_vkn": "5678901234",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Kahve (kg)",
+   "miktar": 6,
+   "birim_fiyat": 640.0,
+   "tutar": 3840.0
+  },
+  {
+   "aciklama": "Danışmanlık (saat)",
+   "miktar": 5,
+   "birim_fiyat": 1500.0,
+   "tutar": 7500.0
+  },
+  {
+   "aciklama": "Yazılım Lisansı (yıllık)",
+   "miktar": 4,
+   "birim_fiyat": 12500.0,
+   "tutar": 50000.0
+  }
+ ],
+ "ara_toplam": 61340.0,
+ "kdv_orani": 10,
+ "kdv_tutari": 6134.0,
+ "genel_toplam": 67474.0
+}

@@ -1,0 +1,26 @@
+{
+ "fatura_no": "ORN2026100370",
+ "tarih": "2026-03-15",
+ "satici_unvan": "Mavi Lojistik A.Ş.",
+ "satici_vkn": "2345678901",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Yazılım Lisansı (yıllık)",
+   "miktar": 7,
+   "birim_fiyat": 12500.0,
+   "tutar": 87500.0
+  },
+  {
+   "aciklama": "Kahve (kg)",
+   "miktar": 8,
+   "birim_fiyat": 640.0,
+   "tutar": 5120.0
+  }
+ ],
+ "ara_toplam": 92620.0,
+ "kdv_orani": 10,
+ "kdv_tutari": 9262.0,
+ "genel_toplam": 101882.0
+}

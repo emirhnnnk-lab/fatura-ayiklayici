@@ -1,0 +1,26 @@
+{
+ "fatura_no": "ORN2026100407",
+ "tarih": "2026-06-22",
+ "satici_unvan": "Deniz Gıda San. Tic. Ltd.",
+ "satici_vkn": "4567890123",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Elektrik Tüketimi (kWh)",
+   "miktar": 1626,
+   "birim_fiyat": 3.85,
+   "tutar": 6260.1
+  },
+  {
+   "aciklama": "Kahve (kg)",
+   "miktar": 5,
+   "birim_fiyat": 640.0,
+   "tutar": 3200.0
+  }
+ ],
+ "ara_toplam": 9460.1,
+ "kdv_orani": 20,
+ "kdv_tutari": 1892.02,
+ "genel_toplam": 11352.12
+}

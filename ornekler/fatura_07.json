@@ -1,0 +1,38 @@
+{
+ "fatura_no": "ORN2026100259",
+ "tarih": "2026-06-20",
+ "satici_unvan": "Yıldız Yazılım A.Ş.",
+ "satici_vkn": "3456789012",
+ "alici_unvan": "Örnek Teknoloji A.Ş.",
+ "alici_vkn": "9876543210",
+ "kalemler": [
+  {
+   "aciklama": "Elektrik Tüketimi (kWh)",
+   "miktar": 2065,
+   "birim_fiyat": 3.85,
+   "tutar": 7950.25
+  },
+  {
+   "aciklama": "A4 Fotokopi Kağıdı (koli)",
+   "miktar": 9,
+   "birim_fiyat": 420.0,
+   "tutar": 3780.0
+  },
+  {
+   "aciklama": "Ofis Sandalyesi",
+   "miktar": 10,
+   "birim_fiyat": 4750.0,
+   "tutar": 47500.0
+  },
+  {
+   "aciklama": "Kahve (kg)",
+   "miktar": 6,
+   "birim_fiyat": 640.0,
+   "tutar": 3840.0
+  }
+ ],
+ "ara_toplam": 63070.25,
+ "kdv_orani": 20,
+ "kdv_tutari": 12614.05,
+ "genel_toplam": 75684.3
+}

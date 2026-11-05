@@ -1,0 +1,26 @@
+{
+ "fatura_no": "ORN2026100074",
+ "tarih": "2026-04-02",
+ "satici_unvan": "Kuzey Enerji A.Ş.",
+ "satici_vkn": "5678901234",
+ "alici_unvan": "Örnek Teknoloji A.Ş.",
+ "alici_vkn": "9876543210",
+ "kalemler": [
+  {
+   "aciklama": "A4 Fotokopi Kağıdı (koli)",
+   "miktar": 10,
+   "birim_fiyat": 420.0,
+   "tutar": 4200.0
+  },
+  {
+   "aciklama": "Danışmanlık (saat)",
+   "miktar": 7,
+   "birim_fiyat": 1500.0,
+   "tutar": 10500.0
+  }
+ ],
+ "ara_toplam": 14700.0,
+ "kdv_orani": 10,
+ "kdv_tutari": 1470.0,
+ "genel_toplam": 16170.0
+}

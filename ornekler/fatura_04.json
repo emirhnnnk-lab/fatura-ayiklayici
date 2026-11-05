@@ -1,0 +1,32 @@
+{
+ "fatura_no": "ORN2026100148",
+ "tarih": "2026-08-22",
+ "satici_unvan": "Kuzey Enerji A.Ş.",
+ "satici_vkn": "5678901234",
+ "alici_unvan": "Örnek Teknoloji A.Ş.",
+ "alici_vkn": "9876543210",
+ "kalemler": [
+  {
+   "aciklama": "Toner Kartuşu",
+   "miktar": 2,
+   "birim_fiyat": 1850.0,
+   "tutar": 3700.0
+  },
+  {
+   "aciklama": "Danışmanlık (saat)",
+   "miktar": 10,
+   "birim_fiyat": 1500.0,
+   "tutar": 15000.0
+  },
+  {
+   "aciklama": "Ofis Sandalyesi",
+   "miktar": 1,
+   "birim_fiyat": 4750.0,
+   "tutar": 4750.0
+  }
+ ],
+ "ara_toplam": 23450.0,
+ "kdv_orani": 10,
+ "kdv_tutari": 2345.0,
+ "genel_toplam": 25795.0
+}

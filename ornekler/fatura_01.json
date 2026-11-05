@@ -1,0 +1,20 @@
+{
+ "fatura_no": "ORN2026100037",
+ "tarih": "2026-01-27",
+ "satici_unvan": "Deniz Gıda San. Tic. Ltd.",
+ "satici_vkn": "4567890123",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Yazılım Lisansı (yıllık)",
+   "miktar": 2,
+   "birim_fiyat": 12500.0,
+   "tutar": 25000.0
+  }
+ ],
+ "ara_toplam": 25000.0,
+ "kdv_orani": 20,
+ "kdv_tutari": 5000.0,
+ "genel_toplam": 30000.0
+}

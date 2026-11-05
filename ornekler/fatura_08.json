@@ -1,0 +1,20 @@
+{
+ "fatura_no": "ORN2026100296",
+ "tarih": "2026-02-02",
+ "satici_unvan": "Deniz Gıda San. Tic. Ltd.",
+ "satici_vkn": "4567890123",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Toner Kartuşu",
+   "miktar": 5,
+   "birim_fiyat": 1850.0,
+   "tutar": 9250.0
+  }
+ ],
+ "ara_toplam": 9250.0,
+ "kdv_orani": 20,
+ "kdv_tutari": 1850.0,
+ "genel_toplam": 11100.0
+}

@@ -1,0 +1,38 @@
+{
+ "fatura_no": "ORN2026100333",
+ "tarih": "2026-08-02",
+ "satici_unvan": "Atlas Mobilya Ltd. Şti.",
+ "satici_vkn": "6789012345",
+ "alici_unvan": "Güneş İnşaat Ltd. Şti.",
+ "alici_vkn": "8765432109",
+ "kalemler": [
+  {
+   "aciklama": "Danışmanlık (saat)",
+   "miktar": 1,
+   "birim_fiyat": 1500.0,
+   "tutar": 1500.0
+  },
+  {
+   "aciklama": "Ofis Sandalyesi",
+   "miktar": 8,
+   "birim_fiyat": 4750.0,
+   "tutar": 38000.0
+  },
+  {
+   "aciklama": "Yazılım Lisansı (yıllık)",
+   "miktar": 6,
+   "birim_fiyat": 12500.0,
+   "tutar": 75000.0
+  },
+  {
+   "aciklama": "Nakliye Hizmeti",
+   "miktar": 3,
+   "birim_fiyat": 3200.0,
+   "tutar": 9600.0
+  }
+ ],
+ "ara_toplam": 124100.0,
+ "kdv_orani": 10,
+ "kdv_tutari": 12410.0,
+ "genel_toplam": 136510.0
+}
