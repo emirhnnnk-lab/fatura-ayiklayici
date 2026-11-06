@@ -1,5 +1,7 @@
 # Fatura / Evrak Ayıklayıcı
 
+**🔴 Canlı demo:** [huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo](https://huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo) — sekme: 🧾 Fatura Ayıklayıcı (demo OpenAI gpt-5.4-mini ile çalışır; iş mantığı bu repodakiyle aynı)
+
 PDF faturayı **doğrulanmış JSON**'a çeviren servis. Lokal LLM (Ollama) ile yapılandırılmış çıktı, kural tabanlı okuma ve iş kuralı doğrulamasını birleştirir. Veri makineden çıkmaz.
 
 ## Akış
