@@ -29,7 +29,7 @@ v1'de küçük model (3B) satıcı ile alıcıyı sık karıştırıyordu ([rapo
 **3. Ne değiştirdim?**
 - Etiketi belli alanları ("Düzenleyen", "Sayın", "VKN", toplamlar) **kuralla** okuttum. Bu alanlarda kural LLM'i ezer.
 - LLM'i yalnızca gerçekten zor olan kısma, yani kalem tablosuna odakladım.
-- Doğrulama kurallarını genişlettim: miktar × fiyat, kalem toplamı, KDV hesabı, satıcı ≠ alıcı.
+- Doğrulama kuralları (miktar × fiyat, kalem toplamı, KDV hesabı, satıcı ≠ alıcı) son kapı olarak kaldı. Okuma düzelince yakalama oranı 1/11'den 2/2'ye çıktı.
 
 **4. Sonuç**
 
