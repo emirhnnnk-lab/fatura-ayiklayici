@@ -1,49 +1,47 @@
 # Fatura / Evrak Ayıklayıcı
 
-> **EN summary:** Turns PDF invoices into validated JSON using a local LLM (Ollama) plus rule-based field extraction and business-rule checks (tax ID, line totals, VAT math, seller ≠ buyer). LLM-only v1 got all fields right on 1/12 invoices; the hybrid v2 gets 10/12, and both remaining errors are caught by validation, so bad data never passes silently. Data never leaves the machine.
+> **EN summary:** Turns PDF invoices into validated JSON using a local LLM (Ollama) plus rule-based field extraction and business-rule checks (tax ID, line totals, VAT math, seller ≠ buyer). LLM-only v1 got all fields right on 1/12 invoices; the hybrid v2 gets 10/12, and both remaining errors are caught by validation, so bad data never passes silently. Data never leaves the machine. Full English version: [README.en.md](README.en.md).
 
-**🔴 Canlı demo:** [huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo](https://huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo) — sekme: 🧾 Fatura Ayıklayıcı (demo OpenAI gpt-5.4-mini ile çalışır; iş mantığı bu repodakiyle aynı)
+**Canlı demo:** [huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo](https://huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo), sekme: 🧾 Fatura Ayıklayıcı. Demo OpenAI gpt-5.4-mini ile çalışıyor; iş mantığı bu repodakiyle aynı.
 
-PDF faturayı **doğrulanmış JSON**'a çeviren servis. Lokal LLM (Ollama) ile yapılandırılmış çıktı, kural tabanlı okuma ve iş kuralı doğrulamasını birleştirir. Veri makineden çıkmaz.
+Muhasebede biri gün boyu PDF faturaları açıp satıcıyı, alıcıyı, kalemleri ve tutarları elle bir yere geçiriyor. Bu servis PDF faturayı alıp **kontrol edilmiş, düzenli bir veriye** (JSON) çeviriyor. Yerel bir model, kurallarla okuma ve hesap kontrollerini birlikte kullanıyor. Veri bilgisayardan çıkmıyor.
 
-## Akış
+## Nasıl çalışıyor
 ```
-PDF → metin (pdfplumber) → ┬─ LLM: JSON şemasına zorlanmış çıktı (kalemler, tutarlar, tarih)
-                           └─ Kural: etiketli alanlar (Düzenleyen, Sayın, VKN, toplamlar)
-                        → birleştir (etiketli alanda kural kazanır) → doğrula → onaylandı / kontrol gerekli
+PDF → metin (pdfplumber) → ┬─ Model: kalemleri, tutarları, tarihi belirli bir kalıba (JSON şeması) uygun çıkarır
+                           └─ Kural: etiketi belli alanları okur (Düzenleyen, Sayın, VKN, toplamlar)
+                        → birleştir (etiketli alanda kural kazanır) → kontrol et → onaylandı / kontrol gerekli
 ```
-**Doğrulama kuralları:** VKN 10 hane · tarih biçimi · miktar × birim fiyat = tutar · kalemler toplamı = ara toplam · ara toplam × KDV oranı = KDV · ara toplam + KDV = genel toplam · satıcı ≠ alıcı.
+**Kontroller:** VKN 10 hane mi · tarih doğru biçimde mi · miktar × birim fiyat = tutar mı · kalemlerin toplamı ara toplamı tutuyor mu · ara toplam × KDV oranı = KDV mi · ara toplam + KDV = genel toplam mı · satıcı ile alıcı aynı kişi mi.
 
 ## Sonuçlar (12 örnek fatura, 2 farklı düzen)
-| Sürüm | Tüm alanlar doğru | Hatalı çıkarımı yakalama |
+| Sürüm | Tüm alanlar doğru | Hatalı okumayı yakalama |
 |---|---|---|
-| v1: sadece LLM | 1/12 | 1/11 |
-| **v2: LLM + kural + doğrulama** | **10/12** | **2/2** |
+| v1: her şey modelde | 1/12 | 1/11 |
+| **v2: model + kural + kontrol** | **10/12** | **2/2** |
 
-v1'de küçük model (3B) satıcı ile alıcıyı sık karıştırıyordu ([rapor](eval/RAPOR_v1_sadece_llm.md)). v2'de etiketli alanlar kuralla okunuyor, LLM kalem tablosuna odaklanıyor. Kalan 2 hatanın ikisi de doğrulama kurallarına takıldı: **hatalı veri sessizce geçmiyor.** Ayrıntı: [eval/RAPOR.md](eval/RAPOR.md)
+## Neler patladı, nasıl düzelttim
 
-## Hata → düzeltme süreci
+**1. İlk sürümde her şeyi modele bıraktım.** 12 faturanın sadece 1'inde bütün alanlar doğru çıktı. Asıl korkutucu olan şuydu: **yanlış okunan 11 faturanın 10'u kontrollerden "onaylandı" diye geçti.** Yani hatalı veri sessizce muhasebeye gidecekti.
 
-**1. Ne bozuktu?** İlk sürümde her şeyi LLM'e bıraktım. 12 faturanın sadece 1'inde tüm alanlar doğru çıktı. Asıl tehlike şuydu: **yanlış okunan 11 faturanın 10'u doğrulamadan "onaylandı" diye geçti.** Hatalı veri sessizce muhasebeye gidecekti.
+**2. Alan alan bakınca sebep ortaya çıktı.** Her alanın ayrı ayrı doğruluğunu çıkardım ([v1 raporu](eval/RAPOR_v1_sadece_llm.md)). Fatura no, tarih ve KDV oranı 12/12 doğruydu. Ama satıcı ünvanı 5/12'de, alıcı ünvanı 2/12'de kalmıştı. Hatalar rastgele değildi: küçük model (3B) **satıcıyla alıcıyı yer değiştiriyordu.** Tutarlar kendi içinde tutarlı kaldığı için toplam kontrolleri bunu göremiyordu.
 
-**2. Nasıl fark ettim?** Alan alan doğruluk tablosu çıkardım ([v1 raporu](eval/RAPOR_v1_sadece_llm.md)). Fatura no, tarih ve KDV oranı 12/12 doğruydu. Ama satıcı ünvanı 5/12, alıcı ünvanı 2/12'de kaldı. Hatalar rastgele değildi: model **satıcı ile alıcıyı yer değiştiriyordu.** Tutarlar tutarlı kaldığı için toplam kontrolleri bu hatayı göremiyordu.
+**3. İşi böldüm.**
+- Etiketi belli olan alanları ("Düzenleyen", "Sayın", "VKN", toplamlar) **kuralla** okuttum. Bu alanlarda kural modeli ezer.
+- Modeli sadece gerçekten zor olan kısma, kalem tablosuna verdim.
+- Hesap kontrolleri son kapı olarak kaldı. Okuma düzelince hatayı yakalama oranı 1/11'den 2/2'ye çıktı.
 
-**3. Ne değiştirdim?**
-- Etiketi belli alanları ("Düzenleyen", "Sayın", "VKN", toplamlar) **kuralla** okuttum. Bu alanlarda kural LLM'i ezer.
-- LLM'i yalnızca gerçekten zor olan kısma, yani kalem tablosuna odakladım.
-- Doğrulama kuralları (miktar × fiyat, kalem toplamı, KDV hesabı, satıcı ≠ alıcı) son kapı olarak kaldı. Okuma düzelince yakalama oranı 1/11'den 2/2'ye çıktı.
-
-**4. Sonuç**
-
-| | v1: sadece LLM | v2: LLM + kural + doğrulama |
+| | v1: her şey modelde | v2: model + kural + kontrol |
 |---|---|---|
 | Tüm alanlar doğru | 1/12 | **10/12** |
 | Satıcı / alıcı ünvanı | 5/12 · 2/12 | **12/12 · 12/12** |
 | Hatalı olup "onaylandı" diye geçen | **10** | **0** |
 
-Kalan 2 hata (kalem tablosu) doğrulamaya takıldı ve "kontrol gerekli" olarak insana gitti. Bir de yanlış alarm var: fatura_01 doğru okunduğu hâlde kontrole düştü. Bu kasıtlı bir tercih; sistem temkinli tarafta hata yapıyor.
+Kalan 2 hata kalem tablosundaydı; ikisi de kontrole takıldı ve "kontrol gerekli" diye insana gitti. Bir de yanlış alarm var: fatura_01 doğru okunduğu halde kontrole düştü. Bu bilinçli bir tercih; sistem hata yapacaksa temkinli tarafta yapıyor.
 
-**Ders:** LLM'in iyi olduğu işi (serbest düzenli tablo) LLM'e, kuralla kesin yapılabilecek işi kurala verdim. En önemli ölçüt doğruluk oranı değil, **hatalı verinin sessizce geçmemesi** oldu.
+**Ders:** Modelin iyi olduğu işi (düzeni değişen tabloyu okumak) modele, kuralla kesin yapılabilecek işi kurala verdim. Benim için en önemli ölçü doğruluk oranı değil, **hatalı verinin sessizce geçmemesi** oldu.
+
+Ayrıntılı rapor: [eval/RAPOR.md](eval/RAPOR.md)
 
 ## Çalıştırma
 ```bash
@@ -56,9 +54,9 @@ pytest
 ```
 
 ## Teknoloji
-Python · FastAPI · Ollama (qwen2.5:3b, JSON şeması ile structured output) · Pydantic · pdfplumber · reportlab · pytest
+Python · FastAPI · Ollama (qwen2.5:3b, JSON şemasıyla çıktı) · Pydantic · pdfplumber · reportlab · pytest
 
-> Örnek faturalar değerlendirme amacıyla üretilmiş uydurma belgelerdir.
+> Örnek faturalar değerlendirme için üretilmiş uydurma belgeler.
 
 ---
 Geliştiren: **Emirhan Karaca**
