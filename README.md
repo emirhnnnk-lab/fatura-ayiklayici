@@ -1,5 +1,7 @@
 # Fatura / Evrak Ayıklayıcı
 
+> **EN summary:** Turns PDF invoices into validated JSON using a local LLM (Ollama) plus rule-based field extraction and business-rule checks (tax ID, line totals, VAT math, seller ≠ buyer). LLM-only v1 got all fields right on 1/12 invoices; the hybrid v2 gets 10/12, and both remaining errors are caught by validation, so bad data never passes silently. Data never leaves the machine.
+
 **🔴 Canlı demo:** [huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo](https://huggingface.co/spaces/emrhnnnnnn/ai-uygulamalar-demo) — sekme: 🧾 Fatura Ayıklayıcı (demo OpenAI gpt-5.4-mini ile çalışır; iş mantığı bu repodakiyle aynı)
 
 PDF faturayı **doğrulanmış JSON**'a çeviren servis. Lokal LLM (Ollama) ile yapılandırılmış çıktı, kural tabanlı okuma ve iş kuralı doğrulamasını birleştirir. Veri makineden çıkmaz.
